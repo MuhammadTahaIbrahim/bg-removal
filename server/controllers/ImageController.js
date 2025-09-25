@@ -24,7 +24,7 @@ const removeBgImage = async (req, res) => {
         const formdata = new FormData()
         formdata.append('image_file', imageFile)
 
-        const { data } = await axios.post('https://clipdrop-api.co/remove-background/v', formdata, {
+        const { data } = await axios.post('https://clipdrop-api.co/remove-background/v1', formdata, {
             headers: {
                 'x-api-key': process.env.CLIPDROP_API,
             },
@@ -39,6 +39,7 @@ const removeBgImage = async (req, res) => {
 
         res.json({ success: true, resultImage, creditBalance: user.creditBalance - 1, message: "Background Removed" })
     } catch (error) {
+        console.log(error.message)
         res.json({ success: false, message: error.message })
     }
 }
